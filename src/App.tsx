@@ -4,11 +4,23 @@ import Register from "./(pages)/auth/register/Register";
 import Login from "./(pages)/auth/login/Login";
 import Listing from "./(pages)/listing/Listing";
 import Header from "./components/header/Header";
-
+import SignUp from "./components/signUp/SignUp";
+import authImg from "./assets/images/authImage.svg";
+import Input from "./components/input/Input";
 function App() {
   return (
     <>
       <Header />
+      <div className="flex items-center min-h-screen">
+        <img
+          src={authImg}
+          alt="auth_image"
+          className="w-1/2 h-screen object-cover"
+        />
+        <div className="w-1/2 flex justify-center items-center px-8">
+          <SignUp />
+        </div>
+      </div>
       {/* <Router>
         <Routes>
           <Route path="auth/register" element={<Register />} />

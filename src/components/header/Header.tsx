@@ -7,7 +7,7 @@ function Header() {
   return (
     <>
       <header className="header">
-        <div className="container_header max-w-480 mx-auto px-25 py-5 flex items-center justify-between">
+        <div className="container_header max-w-480 mx-auto px-25 py-4 flex items-center justify-between">
           <div className="header_left flex items-center gap-1">
             <img src={logo} alt="redseam_logo" className="cursor-pointer" />
             <span className="font-medium text-base leading-none tracking-normal text-[#10151E] cursor-pointer">
