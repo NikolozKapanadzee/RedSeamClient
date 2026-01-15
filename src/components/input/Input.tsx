@@ -1,16 +1,5 @@
 import { Eye } from "lucide-react";
-import { type ChangeEvent } from "react";
-
-type InputProps = {
-  type?: "text" | "email" | "password";
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string;
-  required?: boolean;
-  showTogglePassword?: boolean;
-  onTogglePassword?: () => void;
-  className?: string;
-};
+import type { InputProps } from "../../types/types";
 
 function Input({
   type = "text",

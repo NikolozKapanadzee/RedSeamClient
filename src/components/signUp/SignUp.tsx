@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Input from "../input/Input";
+import Button from "../button/Button";
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -27,7 +28,7 @@ function SignUp() {
 
   return (
     <>
-      <form className="flex flex-col gap-12 max-w-138 w-full">
+      <form className="flex flex-col gap-8 max-w-138 w-full">
         <h1 className="text-[42px] font-poppins font-semibold text-[#10151F]">
           Registration
         </h1>
@@ -121,6 +122,16 @@ function SignUp() {
           showTogglePassword
           onTogglePassword={() => setShowPassword((prev) => !prev)}
         />
+        <Button
+          className="w-full rounded-[10px] bg-[#FF4000] py-2.5 text-[14px] text-white font-poppins font-normal mt-5.5"
+          text="Register"
+        />
+        <p className="text-[14px] text-[#3E424A] font-poppins font-normal w-full text-center">
+          Already member?
+          <span className="pl-2 text-[#FF4000] text-[14px] font-poppins font-medium cursor-pointer">
+            Log in
+          </span>
+        </p>
       </form>
     </>
   );
