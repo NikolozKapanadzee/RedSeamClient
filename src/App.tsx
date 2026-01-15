@@ -7,6 +7,7 @@ import Header from "./components/header/Header";
 import SignUp from "./components/signUp/SignUp";
 import authImg from "./assets/images/authImage.svg";
 import Input from "./components/input/Input";
+import SignIn from "./components/signIn/SignIn";
 function App() {
   return (
     <>
@@ -18,7 +19,8 @@ function App() {
           className="w-1/2 h-screen object-cover"
         />
         <div className="w-1/2 flex justify-center items-center px-8">
-          <SignUp />
+          {/* <SignUp /> */}
+          <SignIn />
         </div>
       </div>
       {/* <Router>
