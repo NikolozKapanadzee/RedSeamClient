@@ -1,12 +1,19 @@
-import { Link } from "react-router";
+import SignIn from "../../../components/signIn/SignIn";
+import authImg from "../../../assets/images/authImage.svg";
 
 function Login() {
   return (
     <>
-      <h1>Login Page</h1>
-      <Link className="text-red-500" to="/auth/register">
-        Register Page
-      </Link>
+      <div className="flex items-center min-h-screen">
+        <img
+          src={authImg}
+          alt="auth_image"
+          className="w-1/2 h-screen object-cover"
+        />
+        <div className="w-1/2 flex justify-center items-center px-8">
+          <SignIn />
+        </div>
+      </div>
     </>
   );
 }

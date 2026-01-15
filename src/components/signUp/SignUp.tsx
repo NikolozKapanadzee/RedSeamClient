@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input from "../input/Input";
 import Button from "../button/Button";
+import { Link } from "react-router";
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -128,9 +129,11 @@ function SignUp() {
         />
         <p className="text-[14px] text-[#3E424A] font-poppins font-normal w-full text-center">
           Already member?
-          <span className="pl-2 text-[#FF4000] text-[14px] font-poppins font-medium cursor-pointer">
-            Log in
-          </span>
+          <Link to="/auth/login">
+            <span className="pl-2 text-[#FF4000] text-[14px] font-poppins font-medium cursor-pointer">
+              Log in
+            </span>
+          </Link>
         </p>
       </form>
     </>
