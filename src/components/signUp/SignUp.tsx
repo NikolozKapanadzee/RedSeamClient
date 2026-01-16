@@ -2,14 +2,23 @@ import { useState } from "react";
 import Input from "../input/Input";
 import Button from "../button/Button";
 import { Link } from "react-router";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { SignUpValidationSchema } from "../../validations/signUpValidationSchema";
 
 function SignUp() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [profileImage, setProfileImage] = useState<string | null>(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(SignUpValidationSchema) });
+
+  const onSubmit = (data: any) => {
+    console.log("Data:", data);
+  };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -29,7 +38,10 @@ function SignUp() {
 
   return (
     <>
-      <form className="flex flex-col gap-8 max-w-138 w-full">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-8 max-w-138 w-full"
+      >
         <h1 className="text-[42px] font-poppins font-semibold text-[#10151F]">
           Registration
         </h1>
@@ -89,43 +101,58 @@ function SignUp() {
           </div>
         </div>
 
-        <Input
-          required
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-        />
+        <div className="flex flex-col gap-1">
+          <Input type="text" placeholder="Username" {...register("username")} />
+          {errors.username && (
+            <span className="text-red-500 text-sm">
+              {errors.username.message as string}
+            </span>
+          )}
+        </div>
 
-        <Input
-          required
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-        />
+        <div className="flex flex-col gap-1">
+          <Input placeholder="Email" type="email" {...register("email")} />
+          {errors.email && (
+            <span className="text-red-500 text-sm">
+              {errors.email.message as string}
+            </span>
+          )}
+        </div>
 
-        <Input
-          required
-          type={showPassword ? "text" : "password"}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          showTogglePassword
-          onTogglePassword={() => setShowPassword((prev) => !prev)}
-        />
+        <div className="flex flex-col gap-1">
+          <Input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            showTogglePassword
+            onTogglePassword={() => setShowPassword((prev) => !prev)}
+            {...register("password")}
+          />
+          {errors.password && (
+            <span className="text-red-500 text-sm">
+              {errors.password.message as string}
+            </span>
+          )}
+        </div>
 
-        <Input
-          required
-          type={showPassword ? "text" : "password"}
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          placeholder="Confirm Password"
-          showTogglePassword
-          onTogglePassword={() => setShowPassword((prev) => !prev)}
-        />
+        <div className="flex flex-col gap-1">
+          <Input
+            type={showPassword ? "text" : "password"}
+            placeholder="Confirm Password"
+            showTogglePassword
+            onTogglePassword={() => setShowPassword((prev) => !prev)}
+            {...register("confirmPassword")}
+          />
+          {errors.confirmPassword && (
+            <span className="text-red-500 text-sm">
+              {errors.confirmPassword.message as string}
+            </span>
+          )}
+        </div>
+
         <Button
           className="w-full rounded-[10px] bg-[#FF4000] py-2.5 text-[14px] text-white font-poppins font-normal mt-5.5"
           text="Register"
+          type="submit"
         />
         <p className="text-[14px] text-[#3E424A] font-poppins font-normal w-full text-center">
           Already member?

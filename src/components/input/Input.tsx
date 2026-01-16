@@ -1,34 +1,36 @@
+import { forwardRef } from "react";
 import { Eye } from "lucide-react";
 import type { InputProps } from "../../types/types";
 
-function Input({
-  type = "text",
-  value,
-  onChange,
-  placeholder,
-  required = false,
-  showTogglePassword = false,
-  onTogglePassword,
-  className,
-}: InputProps) {
+const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+  const {
+    type = "text",
+    placeholder,
+    required = false,
+    showTogglePassword = false,
+    onTogglePassword,
+    className,
+    ...restProps
+  } = props;
+
   return (
     <div className="w-full">
       <div className="relative">
         <input
+          ref={ref}
           type={type}
-          value={value}
-          onChange={onChange}
-          placeholder=""
+          placeholder={placeholder}
           className={`
-            peer  border border-gray-300 outline-none px-3 text-[14px] text-[#3E424A] font-poppins font-medium py-[10.5px] w-full rounded-lg placeholder:text-[#3E424A] placeholder:font-poppins placeholder:font-light
-            ${className ?? ""}
-          `}
+              peer border border-gray-300 outline-none px-3 text-[14px] text-[#3E424A] font-poppins font-medium py-[10.5px] w-full rounded-lg placeholder:text-[#3E424A] placeholder:font-poppins placeholder:font-light
+              ${className ?? ""}
+            `}
+          {...restProps}
         />
 
-        {!value && (
+        {required && (
           <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[#3E424A] text-sm">
             {placeholder}
-            {required && <span className="text-red-500 ml-0.5">*</span>}
+            <span className="text-red-500 ml-0.5">*</span>
           </span>
         )}
 
@@ -44,6 +46,8 @@ function Input({
       </div>
     </div>
   );
-}
+});
+
+Input.displayName = "Input";
 
 export default Input;
