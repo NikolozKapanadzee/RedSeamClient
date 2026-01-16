@@ -3,6 +3,8 @@ import Input from "../input/Input";
 import Button from "../button/Button";
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { SignInValidationSchema } from "../../validations/signInValidationSchema";
 
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,7 +13,7 @@ function SignIn() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ resolver: yupResolver(SignInValidationSchema) });
 
   const onSubmit = (data: any) => {
     console.log("Data:", data);
@@ -28,13 +30,7 @@ function SignIn() {
         </h1>
 
         <div className="flex flex-col gap-1">
-          <Input
-            type="email"
-            placeholder="Email"
-            {...register("email", {
-              required: { message: "This Field Is Required", value: true },
-            })}
-          />
+          <Input type="email" placeholder="Email" {...register("email")} />
           {errors.email && (
             <span className="text-red-500 text-sm">
               {errors.email.message as string}
@@ -48,9 +44,7 @@ function SignIn() {
             placeholder="Password"
             showTogglePassword
             onTogglePassword={() => setShowPassword((prev) => !prev)}
-            {...register("password", {
-              required: { message: "This Field Is Required", value: true },
-            })}
+            {...register("password")}
           />
           {errors.password && (
             <span className="text-red-500 text-sm">
